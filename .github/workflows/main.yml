@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
-        arch: [arm64, armhf, i386]
+        arch: [amd64, i386, arm64, armhf, armel]
     steps:   
     - name: Install Cross-Compile Support
       uses: cyberjunk/gha-ubuntu-cross@master
