@@ -38,20 +38,20 @@ runs:
         if [ $ARCH != amd64 ] && [ $ARCH != i386 ]; then \
           sudo apt-get install crossbuild-essential-$ARCH; \
         fi        
-        if [ $ARCH == amd64 ]; then export ARCHGCC=x86-64; fi
-        if [ $ARCH == i386 ]; then export ARCHGCC=i686; fi
-        if [ $ARCH == arm64 ]; then export ARCHGCC=aarch64; fi
-        if [ $ARCH == armhf ]; then export ARCHGCC=arm; fi
-        if [ $ARCH == armel ]; then export ARCHGCC=arm; fi 
+        if [ $ARCH == amd64 ]; then export ARCHGCC=x86-64-linux-gnu; fi
+        if [ $ARCH == i386 ]; then export ARCHGCC=i686-linux-gnu; fi
+        if [ $ARCH == arm64 ]; then export ARCHGCC=aarch64-linux-gnu; fi
+        if [ $ARCH == armhf ]; then export ARCHGCC=arm-linux-gnueabihf; fi
+        if [ $ARCH == armel ]; then export ARCHGCC=arm-linux-gnueabi; fi 
         if [ $CODENAME == bionic ]; then \
           sudo apt-get purge gcc-5 g++-5 gcc-6 g++-6 gcc-7 g++-7 gcc-8 g++-8; \
-          sudo apt-get install gcc-7-$ARCHGCC-linux-gnu libstdc++-7-dev-$ARCH-cross; \
+          sudo apt-get install gcc-7-$ARCHGCC libstdc++-7-dev-$ARCH-cross; \
         fi       
         if [ $CODENAME == focal ]; then \
           sudo apt-get purge gcc-8 g++-8 gcc-9 g++-9 gcc-10 g++-10 gcc-11 g++-11; \
-          sudo apt-get install gcc-9-$ARCHGCC-linux-gnu libstdc++-9-dev-$ARCH-cross; \
+          sudo apt-get install gcc-9-$ARCHGCC libstdc++-9-dev-$ARCH-cross; \
         fi
         if [ $CODENAME == jammy ]; then \
           sudo apt-get purge gcc-9 g++-9 gcc-10 g++-10 gcc-11 g++-11 gcc-12 g++-12; \
-          sudo apt-get install gcc-11-$ARCHGCC-linux-gnu libstdc++-11-dev-$ARCH-cross; \
+          sudo apt-get install gcc-11-$ARCHGCC libstdc++-11-dev-$ARCH-cross; \
         fi
