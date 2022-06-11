@@ -1,5 +1,5 @@
 name: 'Cross-Compile Support on Ubuntu'
-description: 'Adds APT package repository for given arch and installs basic cross compile packages from it.'
+description: 'Adds APT package repository for Ubuntu architecture and installs cross-compile packages from it.'
 inputs:
   arch:
     description: "A valid Ubuntu [arch] like arm64, armhf or i386"
@@ -8,7 +8,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: "Add Repository and install packages"
+    - name: "Add repository and install packages"
       shell: bash
       env:
         ARCH: ${{ inputs.arch }}
@@ -46,7 +46,6 @@ runs:
         if [ $ARCH == armhf ]; then export ARCHGCC=arm-linux-gnueabihf; fi
         if [ $ARCH == armel ]; then export ARCHGCC=arm-linux-gnueabi; fi 
         if [ $CODENAME == bionic ]; then \
-          sudo apt-get purge gcc-5 g++-5 gcc-6 g++-6 gcc-7 g++-7 gcc-8 g++-8; \
           sudo apt-get install \
             clang-10 \
             gcc-8-$ARCHGCC \
@@ -55,7 +54,6 @@ runs:
             libstdc++-8-dev:$ARCH; \
         fi       
         if [ $CODENAME == focal ]; then \
-          sudo apt-get purge gcc-8 g++-8 gcc-9 g++-9 gcc-10 g++-10; \
           sudo apt-get install \
             clang-12 \
             gcc-10-$ARCHGCC \
@@ -64,7 +62,6 @@ runs:
             libstdc++-10-dev:$ARCH; \
         fi
         if [ $CODENAME == jammy ]; then \
-          sudo apt-get purge gcc-9 g++-9 gcc-10 g++-10 gcc-11 g++-11 gcc-12 g++-12; \
           sudo apt-get install \
             clang-14 \
             gcc-11-$ARCHGCC \
