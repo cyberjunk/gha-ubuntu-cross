@@ -46,14 +46,26 @@ runs:
         if [ $ARCH == armel ]; then export ARCHGCC=arm-linux-gnueabi; fi 
         if [ $CODENAME == bionic ]; then \
           sudo apt-get purge gcc-5 g++-5 gcc-6 g++-6 gcc-7 g++-7 gcc-8 g++-8; \
-          sudo apt-get install gcc-8-$ARCHGCC g++-8-$ARCHGCC libstdc++-8-dev-$ARCH-cross; \
+          sudo apt-get install \
+            gcc-8-$ARCHGCC \
+            g++-8-$ARCHGCC \
+            libstdc++-8-dev-$ARCH-cross \
+            libstdc++-8-dev:$ARCH; \
         fi       
         if [ $CODENAME == focal ]; then \
           sudo apt-get purge gcc-8 g++-8 gcc-9 g++-9 gcc-10 g++-10; \
-          sudo apt-get install gcc-10-$ARCHGCC g++-10-$ARCHGCC libstdc++-10-dev-$ARCH-cross; \
+          sudo apt-get install \
+            gcc-10-$ARCHGCC \
+            g++-10-$ARCHGCC \
+            libstdc++-10-dev-$ARCH-cross \
+            libstdc++-10-dev:$ARCH; \
         fi
         if [ $CODENAME == jammy ]; then \
           sudo apt-get purge gcc-9 g++-9 gcc-10 g++-10 gcc-11 g++-11 gcc-12 g++-12; \
-          sudo apt-get install gcc-11-$ARCHGCC g++-11-$ARCHGCC libstdc++-11-dev-$ARCH-cross; \
+          sudo apt-get install \
+            gcc-11-$ARCHGCC \
+            g++-11-$ARCHGCC \
+            libstdc++-11-dev-$ARCH-cross \
+            libstdc++-11-dev:$ARCH; \
         fi
         clang++ --target=$ARCHGCC -v
