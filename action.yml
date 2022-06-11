@@ -39,21 +39,11 @@ runs:
           sudo apt-get install crossbuild-essential-$ARCH; \
         fi   
         if [ $CODENAME == bionic ]; then \
-          sudo apt-get install \
-            libstdc++-5-dev-$ARCH-cross \
-            libstdc++-6-dev-$ARCH-cross \
-            libstdc++-7-dev-$ARCH-cross \
-            libstdc++-8-dev-$ARCH-cross; \
+          sudo apt-get install libstdc++-7-dev-$ARCH-cross;
         fi       
         if [ $CODENAME == focal ]; then \
-          sudo apt-get install \
-            libstdc++-8-dev-$ARCH-cross \
-            libstdc++-9-dev-$ARCH-cross \
-            libstdc++-10-dev-$ARCH-cross; \
+          sudo apt-get install libstdc++-9-dev-$ARCH-cross;
         fi
         if [ $CODENAME == jammy ]; then \
-          sudo apt-get install \
-            libstdc++-9-dev-$ARCH-cross \
-            libstdc++-10-dev-$ARCH-cross \
-            libstdc++-11-dev-$ARCH-cross;
+          sudo apt-get install libstdc++-11-dev-$ARCH-cross;
         fi
