@@ -2,8 +2,12 @@
 
 ### Description
 
-* Adds Ubuntu APT package repository for specified arch.
-* Installs basic dev packages for specified arch (like libc and libstdc++)
+* Adds Ubuntu APT package repository for input parameter `arch`.
+* Installs basic dev packages for input parameter `arch`:
+  * libstdc++-10-dev-`$arch`-cross
+  * libstdc++6-`$arch`-cross
+  * libc6-dev-`$arch`-cross
+  * linux-libc-dev-`$arch`-cross
 
 ### Input Parameter: arch
 
