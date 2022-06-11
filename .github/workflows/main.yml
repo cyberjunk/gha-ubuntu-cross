@@ -12,6 +12,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
         arch: [arm64, armhf, i386]
