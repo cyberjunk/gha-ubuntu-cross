@@ -37,12 +37,12 @@ runs:
             linux-libc-dev-$ARCH-cross
         if [ $ARCH != amd64 ] && [ $ARCH != i386 ]; then \
           sudo apt-get install crossbuild-essential-$ARCH; \
-        fi
-        if [ $ARCH == i386 ]; then \
-          export ARCHGCC=i686; \
-        else \
-          export ARCHGCC=$ARCH; \
-        fi
+        fi        
+        if [ $ARCH == amd64 ]; then export ARCHGCC=x86-64; fi
+        if [ $ARCH == i386 ]; then export ARCHGCC=i686; fi
+        if [ $ARCH == arm64 ]; then export ARCHGCC=aarch64; fi
+        if [ $ARCH == armhf ]; then export ARCHGCC=arm; fi
+        if [ $ARCH == armel ]; then export ARCHGCC=arm; fi 
         if [ $CODENAME == bionic ]; then \
           sudo apt-get purge gcc-5 g++-5 gcc-6 g++-6 gcc-7 g++-7 gcc-8 g++-8; \
           sudo apt-get install gcc-7-$ARCHGCC-linux-gnu libstdc++-7-dev-$ARCH-cross; \
