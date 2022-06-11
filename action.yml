@@ -55,6 +55,5 @@ runs:
           sudo apt-get install \
             libstdc++-9-dev-$ARCH-cross \
             libstdc++-10-dev-$ARCH-cross \
-            libstdc++-11-dev-$ARCH-cross \
-            libstdc++-12-dev-$ARCH-cross; \
+            libstdc++-11-dev-$ARCH-cross;
         fi
