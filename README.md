@@ -4,13 +4,9 @@
 
 ### Description
 
-* Requires AMD64 Ubuntu 18.04, 20.04 or 22.04
+* Requires AMD64 Ubuntu 18.04, 20.04 or 22.04.
 * Adds Ubuntu APT package repository for input parameter `arch`.
-* Installs basic dev packages for input parameter `arch`:
-  * libstdc++-10-dev-`$arch`-cross (20.04 and 22.04 only)
-  * libstdc++6-`$arch`-cross
-  * libc6-dev-`$arch`-cross
-  * linux-libc-dev-`$arch`-cross
+* Installs cross-compile packages from added repository.
 
 ### Input Parameter: arch
 
