@@ -31,15 +31,28 @@ runs:
           sudo sed -i 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list; \
         fi
         sudo apt-get update
+        sudo apt-get install \
+            crossbuild-essential-$ARCH \
+            libstdc++6-$ARCH-cross \
+            libc6-dev-$ARCH-cross \
+            linux-libc-dev-$ARCH-cross
         if [ $CODENAME == bionic ]; then \
           sudo apt-get install \
-            libstdc++6-$ARCH-cross \
-            libc6-dev-$ARCH-cross \
-            linux-libc-dev-$ARCH-cross; \
-        else \
+            libstdc++-5-dev-$ARCH-cross \
+            libstdc++-6-dev-$ARCH-cross \
+            libstdc++-7-dev-$ARCH-cross \
+            libstdc++-8-dev-$ARCH-cross; \
+        fi       
+        if [ $CODENAME == focal ]; then \
           sudo apt-get install \
+            libstdc++-8-dev-$ARCH-cross \
+            libstdc++-9-dev-$ARCH-cross \
+            libstdc++-10-dev-$ARCH-cross; \
+        fi
+        if [ $CODENAME == jammy ]; then \
+          sudo apt-get install \
+            libstdc++-9-dev-$ARCH-cross \
             libstdc++-10-dev-$ARCH-cross \
-            libstdc++6-$ARCH-cross \
-            libc6-dev-$ARCH-cross \
-            linux-libc-dev-$ARCH-cross; \
+            libstdc++-11-dev-$ARCH-cross \
+            libstdc++-12-dev-$ARCH-cross; \
         fi
