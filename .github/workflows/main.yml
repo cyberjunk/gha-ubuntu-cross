@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-20.04, ubuntu-22.04]
+        arch: [arm64, armhf, i386]
+    steps:   
+    - name: Install Cross-Compile Support
+      uses: cyberjunk/gha-ubuntu-cross@master
+      with:
+        arch: ${{ matrix.arch }}    
+    - name: Install a package (libx11-dev)
+      env:
+        arch: ${{ matrix.arch }} 
+      run: sudo apt-get install libx11-dev:$arch

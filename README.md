@@ -1,5 +1,7 @@
 # Github Action for Cross-Compile Support on Ubuntu
 
+[![CI](https://github.com/cyberjunk/gha-ubuntu-cross/actions/workflows/main.yml/badge.svg)](https://github.com/cyberjunk/gha-ubuntu-cross/actions/workflows/main.yml)
+
 ### Description
 
 * Requires AMD64 Ubuntu 18.04, 20.04 or 22.04
