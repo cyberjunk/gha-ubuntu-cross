@@ -22,7 +22,7 @@ Must be one of the valid Ubuntu architectures. Tested with:
   steps:
   
   - name: Install Cross-Compile Support (ARM64)
-    uses: cyberjunk/gha-ubuntu-cross@v1
+    uses: cyberjunk/gha-ubuntu-cross@v2
     with:
       arch: arm64
       
