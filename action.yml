@@ -32,7 +32,6 @@ runs:
         fi
         sudo apt-get update
         sudo apt-get install \
-            llvm clang \
             libstdc++6-$ARCH-cross \
             libc6-dev-$ARCH-cross \
             libc6-dev:$ARCH \
@@ -46,4 +45,25 @@ runs:
         if [ $ARCH == arm64 ]; then export ARCHGCC=aarch64-linux-gnu; fi
         if [ $ARCH == armhf ]; then export ARCHGCC=arm-linux-gnueabihf; fi
         if [ $ARCH == armel ]; then export ARCHGCC=arm-linux-gnueabi; fi 
+        if [ $CODENAME == bionic ]; then \
+          sudo apt-get install \
+            gcc-$ARCHGCC \
+            g++-$ARCHGCC \
+            libstdc++-dev-$ARCH-cross \
+            libstdc++-dev:$ARCH; \
+        fi       
+        if [ $CODENAME == focal ]; then \
+          sudo apt-get install \
+            gcc-$ARCHGCC \
+            g++-$ARCHGCC \
+            libstdc++-dev-$ARCH-cross \
+            libstdc++-dev:$ARCH; \
+        fi
+        if [ $CODENAME == jammy ]; then \
+          sudo apt-get install \
+            gcc-$ARCHGCC \
+            g++-$ARCHGCC \
+            libstdc++-dev-$ARCH-cross \
+            libstdc++-dev:$ARCH; \
+        fi
         clang++ --target=$ARCHGCC -v
