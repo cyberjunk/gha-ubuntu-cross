@@ -36,7 +36,8 @@ runs:
             libstdc++6-$ARCH-cross \
             libc6-dev-$ARCH-cross \
             libc6-dev:$ARCH \
-            linux-libc-dev-$ARCH-cross
+            linux-libc-dev-$ARCH-cross \
+            linux-libc-dev:$ARCH
         if [ $ARCH != amd64 ] && [ $ARCH != i386 ]; then \
           sudo apt-get install crossbuild-essential-$ARCH; \
         fi        
