@@ -66,4 +66,3 @@ runs:
             libstdc++-11-dev-$ARCH-cross \
             libstdc++-11-dev:$ARCH; \
         fi
-        clang++ --target=$ARCHGCC -v
