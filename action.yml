@@ -30,7 +30,7 @@ runs:
         else \
           sudo sed -i 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list; \
         fi
-        sudo apt-get update
+        sudo apt-get update || true
         sudo apt-get install \
             libstdc++6-$ARCH-cross \
             libc6-dev-$ARCH-cross \
