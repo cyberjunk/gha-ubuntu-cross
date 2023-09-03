@@ -25,12 +25,7 @@ runs:
             deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME multiverse \n\
             deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME-updates multiverse \n\
             deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME-backports main restricted universe multiverse \n' > $APTFILE"; fi
-        if [ $ARCH == i386 ]; then \
-          sudo sed -i 's/deb http/deb [arch=amd64,i386] http/g' /etc/apt/sources.list; \
-        else \
-          sudo sed -i 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list; \
-        fi
-        sudo apt-get update || true
+        sudo apt-get update
         sudo apt-get install \
             libstdc++6-$ARCH-cross \
             libc6-dev-$ARCH-cross \
