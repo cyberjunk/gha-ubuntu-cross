@@ -1,5 +1,5 @@
-name: 'Cross-Compile Support on Ubuntu'
-description: 'Adds APT package repository for Ubuntu architecture and installs cross-compile packages from it.'
+name: "Cross-Compile Support on Ubuntu"
+description: "Adds APT package repository for Ubuntu architecture and installs cross-compile packages from it."
 inputs:
   arch:
     description: "A valid Ubuntu [arch] like arm64, armhf or i386"
@@ -31,14 +31,14 @@ runs:
           sudo sed -i 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list; \
         fi
         sudo apt-get update
-        sudo apt-get install \
+        sudo apt-get install -y \
             libstdc++6-$ARCH-cross \
             libc6-dev-$ARCH-cross \
             libc6-dev:$ARCH \
             linux-libc-dev-$ARCH-cross \
             linux-libc-dev:$ARCH
         if [ $ARCH != amd64 ] && [ $ARCH != i386 ]; then \
-          sudo apt-get install crossbuild-essential-$ARCH; \
+          sudo apt-get install -y crossbuild-essential-$ARCH; \
         fi        
         if [ $ARCH == amd64 ]; then export ARCHGCC=x86-64-linux-gnu; fi
         if [ $ARCH == i386 ]; then export ARCHGCC=i686-linux-gnu; fi
@@ -46,21 +46,21 @@ runs:
         if [ $ARCH == armhf ]; then export ARCHGCC=arm-linux-gnueabihf; fi
         if [ $ARCH == armel ]; then export ARCHGCC=arm-linux-gnueabi; fi 
         if [ $CODENAME == bionic ]; then \
-          sudo apt-get install \
+          sudo apt-get install -y \
             gcc-8-$ARCHGCC \
             g++-8-$ARCHGCC \
             libstdc++-8-dev-$ARCH-cross \
             libstdc++-8-dev:$ARCH; \
         fi       
         if [ $CODENAME == focal ]; then \
-          sudo apt-get install \
+          sudo apt-get install -y \
             gcc-10-$ARCHGCC \
             g++-10-$ARCHGCC \
             libstdc++-10-dev-$ARCH-cross \
             libstdc++-10-dev:$ARCH; \
         fi
         if [ $CODENAME == jammy ]; then \
-          sudo apt-get install \
+          sudo apt-get install -y \
             gcc-11-$ARCHGCC \
             g++-11-$ARCHGCC \
             libstdc++-11-dev-$ARCH-cross \
