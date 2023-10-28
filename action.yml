@@ -27,8 +27,10 @@ runs:
             deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME-backports main restricted universe multiverse \n' > $APTFILE"; fi
         if [ $ARCH == i386 ]; then \
           sudo sed -i 's/deb http/deb [arch=amd64,i386] http/g' /etc/apt/sources.list; \
+          sudo sed -i 's/deb mirror/deb [arch=amd64,i386] mirror/g' /etc/apt/sources.list; \
         else \
           sudo sed -i 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list; \
+          sudo sed -i 's/deb mirror/deb [arch=amd64] mirror/g' /etc/apt/sources.list; \
         fi
         sudo apt-get update
         sudo apt-get install -y \
