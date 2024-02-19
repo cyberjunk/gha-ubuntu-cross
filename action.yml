@@ -47,6 +47,13 @@ runs:
         if [ $ARCH == arm64 ]; then export ARCHGCC=aarch64-linux-gnu; fi
         if [ $ARCH == armhf ]; then export ARCHGCC=arm-linux-gnueabihf; fi
         if [ $ARCH == armel ]; then export ARCHGCC=arm-linux-gnueabi; fi 
+        if [ $ARCH == mips64 ]; then export ARCHGCC=mips64-linux-gnuabi64; fi 
+        if [ $ARCH == mips64el ]; then export ARCHGCC=mips64el-linux-gnuabi64-gcc; fi 
+        if [ $ARCH == ppc64 ]; then export ARCHGCC=powerpc64-linux-gnu; fi 
+        if [ $ARCH == ppc64el ]; then export ARCHGCC=powerpc64le-linux-gnu; fi 
+        if [ $ARCH == riscv64 ]; then export ARCHGCC=riscv64-linux-gnu; fi 
+        if [ $ARCH == s390x ]; then export ARCHGCC=s390x-linux-gnu; fi 
+        if [ $ARCH == sparc64 ]; then export ARCHGCC=sparc64-linux-gnu; fi 
         if [ $CODENAME == bionic ]; then \
           sudo apt-get install -y \
             gcc-8-$ARCHGCC \
