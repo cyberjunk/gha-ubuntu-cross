@@ -16,11 +16,9 @@ jobs:
       matrix:
         os: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
         arch: [i386, arm64, armhf, ppc64el, riscv64, s390x]
-    env:
-      BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
     steps:   
     - name: Install Cross-Compile Support
-      uses: cyberjunk/gha-ubuntu-cross@${{ github.head_ref || github.ref_name }}
+      uses: cyberjunk/gha-ubuntu-cross@master
       with:
         arch: ${{ matrix.arch }}    
     - name: Install a package (libx11-dev)
