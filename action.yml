@@ -19,20 +19,19 @@ runs:
         sudo dpkg --add-architecture $ARCH
         if [ $CODENAME == noble ]; then \
           export DEFAULTAPTFILE=/etc/apt/sources.list.d/ubuntu.sources; \
-          cat $DEFAULTAPTFILE; \
           if [ $ARCH == i386 ]; then \
             sudo sed -i 's/Components: main universe restricted multiverse/Components: main universe restricted multiverse\nArchitectures: amd64 i386/g' $DEFAULTAPTFILE; \
           else \
             sudo sed -i 's/Components: main universe restricted multiverse/Components: main universe restricted multiverse\nArchitectures: amd64/g' $DEFAULTAPTFILE; \
           fi \
         else \
-          cat /etc/apt/sources.list; \
+          export DEFAULTAPTFILE=/etc/apt/sources.list; \
           if [ $ARCH == i386 ]; then \
-            sudo sed -i 's/deb http/deb [arch=amd64,i386] http/g' /etc/apt/sources.list; \
-            sudo sed -i 's/deb mirror/deb [arch=amd64,i386] mirror/g' /etc/apt/sources.list; \
+            sudo sed -i 's/deb http/deb [arch=amd64,i386] http/g' $DEFAULTAPTFILE; \
+            sudo sed -i 's/deb mirror/deb [arch=amd64,i386] mirror/g' $DEFAULTAPTFILE; \
           else \
-            sudo sed -i 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list; \
-            sudo sed -i 's/deb mirror/deb [arch=amd64] mirror/g' /etc/apt/sources.list; \
+            sudo sed -i 's/deb http/deb [arch=amd64] http/g' $DEFAULTAPTFILE; \
+            sudo sed -i 's/deb mirror/deb [arch=amd64] mirror/g' $DEFAULTAPTFILE; \
           fi \
         fi
         export APTFILE=/etc/apt/sources.list.d/$ARCH-cross-compile-sources.list; \
