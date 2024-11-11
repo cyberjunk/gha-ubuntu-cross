@@ -14,6 +14,8 @@ runs:
         ARCH: ${{ inputs.arch }}
       run: |
         export CODENAME=$(lsb_release -c -s)
+        export HOSTARCH=$(dpkg --print-architecture)
+        echo Running on $HOSTARCH
         export APTFILE=/etc/apt/sources.list.d/$ARCH-cross-compile-sources.list
         sudo dpkg --add-architecture $ARCH
         if [ $ARCH != amd64 ] && [ $ARCH != i386 ]; then \
