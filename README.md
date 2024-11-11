@@ -4,7 +4,7 @@
 
 ### Description
 
-* Requires AMD64 Ubuntu 18.04, 20.04 or 22.04.
+* Requires AMD64 Ubuntu 20.04, 22.04 or 24.04.
 * Adds Ubuntu APT package repository for input parameter `arch`.
 * Installs cross-compile packages from added repository.
 
