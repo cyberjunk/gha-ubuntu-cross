@@ -13,9 +13,28 @@ runs:
       env:
         ARCH: ${{ inputs.arch }}
       run: |
+        export HOSTARCH=$(dpkg --print-architecture)
         export CODENAME=$(lsb_release -c -s)
         export APTFILE=/etc/apt/sources.list.d/$ARCH-cross-compile-sources.list
         sudo dpkg --add-architecture $ARCH
+        if [ $CODENAME == noble ]; then \
+          export DEFAULTAPTFILE=/etc/apt/sources.list.d/ubuntu.sources; \
+          export REPLACETHIS="Components: main universe restricted multiverse"; \
+          if [ $ARCH == i386 ]; then \
+            sudo sed -i 's/'"$REPLACETHIS"'/'"$REPLACETHIS"'\nArchitectures: amd64 i386/g' $DEFAULTAPTFILE; \
+          else \
+            sudo sed -i 's/'"$REPLACETHIS"'/'"$REPLACETHIS"'\nArchitectures: amd64/g' $DEFAULTAPTFILE; \
+          fi \
+        else \
+          export DEFAULTAPTFILE=/etc/apt/sources.list; \
+          if [ $ARCH == i386 ]; then \
+            sudo sed -i 's/deb http/deb [arch=amd64,i386] http/g' $DEFAULTAPTFILE; \
+            sudo sed -i 's/deb mirror/deb [arch=amd64,i386] mirror/g' $DEFAULTAPTFILE; \
+          else \
+            sudo sed -i 's/deb http/deb [arch=amd64] http/g' $DEFAULTAPTFILE; \
+            sudo sed -i 's/deb mirror/deb [arch=amd64] mirror/g' $DEFAULTAPTFILE; \
+          fi \
+        fi
         if [ $ARCH != amd64 ] && [ $ARCH != i386 ]; then \
           sudo bash -c "echo -e '\
             deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME main restricted \n\
@@ -24,13 +43,7 @@ runs:
             deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME-updates universe \n\
             deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME multiverse \n\
             deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME-updates multiverse \n\
-            deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME-backports main restricted universe multiverse \n' > $APTFILE"; fi
-        if [ $ARCH == i386 ]; then \
-          sudo sed -i 's/deb http/deb [arch=amd64,i386] http/g' /etc/apt/sources.list; \
-          sudo sed -i 's/deb mirror/deb [arch=amd64,i386] mirror/g' /etc/apt/sources.list; \
-        else \
-          sudo sed -i 's/deb http/deb [arch=amd64] http/g' /etc/apt/sources.list; \
-          sudo sed -i 's/deb mirror/deb [arch=amd64] mirror/g' /etc/apt/sources.list; \
+            deb [arch=$ARCH] http://ports.ubuntu.com/ $CODENAME-backports main restricted universe multiverse \n' > $APTFILE"; \
         fi
         sudo apt-get update
         sudo apt-get install -y \
@@ -72,6 +85,13 @@ runs:
           sudo apt-get install -y \
             gcc-11-$ARCHGCC \
             g++-11-$ARCHGCC \
+            libstdc++-11-dev-$ARCH-cross \
+            libstdc++-11-dev:$ARCH; \
+        fi
+        if [ $CODENAME == noble ]; then \
+          sudo apt-get install -y \
+            gcc-13-$ARCHGCC \
+            g++-13-$ARCHGCC \
             libstdc++-11-dev-$ARCH-cross \
             libstdc++-11-dev:$ARCH; \
         fi
