@@ -20,7 +20,11 @@ runs:
         if [ $CODENAME == noble ]; then \
           export DEFAULTAPTFILE=/etc/apt/sources.list.d/ubuntu.sources; \
           export REPLACETHIS="Components: main universe restricted multiverse"
-          sudo sed -i 's/'"$REPLACETHIS"'/'"$REPLACETHIS"'\nArchitectures: amd64 i386/g' $DEFAULTAPTFILE; \
+          if [ $ARCH == i386 ]; then \
+            sudo sed -i 's/'"$REPLACETHIS"'/'"$REPLACETHIS"'\nArchitectures: amd64 i386/g' $DEFAULTAPTFILE; \
+          else \
+            sudo sed -i 's/'"$REPLACETHIS"'/'"$REPLACETHIS"'\nArchitectures: amd64/g' $DEFAULTAPTFILE; \
+          fi \
         else \
           export DEFAULTAPTFILE=/etc/apt/sources.list; \
           if [ $ARCH == i386 ]; then \
