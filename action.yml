@@ -21,9 +21,9 @@ runs:
           export DEFAULTAPTFILE=/etc/apt/sources.list.d/ubuntu.sources; \
           export REPLACETHIS="Components: main universe restricted multiverse"
           if [ $ARCH == i386 ]; then \
-            sudo sed -i 's/'"$REPLACETHIS"'/Components: main universe restricted multiverse\nArchitectures: amd64 i386/g' $DEFAULTAPTFILE; \
+            sudo sed -i 's/'"$REPLACETHIS"'/'"$REPLACETHIS"'\nArchitectures: amd64 i386/g' $DEFAULTAPTFILE; \
           else \
-            sudo sed -i 's/'"$REPLACETHIS"'/Components: main universe restricted multiverse\nArchitectures: amd64/g' $DEFAULTAPTFILE; \
+            sudo sed -i 's/'"$REPLACETHIS"'/'"$REPLACETHIS"'\nArchitectures: amd64/g' $DEFAULTAPTFILE; \
           fi \
         else \
           export DEFAULTAPTFILE=/etc/apt/sources.list; \
