@@ -20,7 +20,7 @@ jobs:
       BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
     steps:   
     - name: Install Cross-Compile Support
-      uses: cyberjunk/gha-ubuntu-cross@${{ env.BRANCH_NAME }}
+      uses: cyberjunk/gha-ubuntu-cross@${{ github.head_ref || github.ref_name }}
       with:
         arch: ${{ matrix.arch }}    
     - name: Install a package (libx11-dev)
