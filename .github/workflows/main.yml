@@ -18,7 +18,7 @@ jobs:
         arch: [i386, arm64, armhf]
     steps:   
     - name: Install Cross-Compile Support
-      uses: cyberjunk/gha-ubuntu-cross@master
+      uses: cyberjunk/gha-ubuntu-cross@feature/ubuntu-24.04
       with:
         arch: ${{ matrix.arch }}    
     - name: Install a package (libx11-dev)
